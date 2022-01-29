@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 
 
 
 
 function Home() {
+
+    const [disArr, changeDis] = useState(['', 'none']);
+
     let jObj = {
         "Leeds United": "Leeds",
         "Arsenal": "Arsenal",
@@ -89,8 +92,13 @@ function Home() {
             "message": "no games on this date"
         }
     ]
-    let fixSatArr = (fixture[0].success) ? fixture[0].data : [];
 
+    function showSat(e) {
+        changeDis(['', 'none']);
+    }
+    function showSun(e) {
+        changeDis(['none', '']);
+    }
     function jersey(teamName) {
         let link = "https://pbteams.nbc-sports-boom-fantasy.com/cdn-cgi/image/f=auto,fit=contain,width=200/https://pbteams.s3.amazonaws.com/" + jObj[teamName] + "2021.png";
 
@@ -103,12 +111,12 @@ function Home() {
             } />
         );
     }
-    
+
     function matchDiv(day) {
         let dayArr = ["Saturday", "Sunday"];
         let matchArr = (fixture[day].success) ? fixture[day].data : [];
         const ans = (matchArr.length === 0) ? (
-            <div className='match_message row'>
+            <div className='home_match row'>
                 No match this {dayArr[day]}!
             </div>
         ) : matchArr.map((fixture) => {
@@ -125,7 +133,6 @@ function Home() {
                                 <div className='jersey col-12'>
                                     {jersey(fixture.teamName[0])}
                                 </div>
-
                             </div>
                             <div className='match_team_name row'>
                                 <div className='team_name_text col-12'>
@@ -158,7 +165,7 @@ function Home() {
 
         return ans;
     }
-    
+
     return (
         <div className='home container'>
             <div className='home_row row'>
@@ -168,11 +175,13 @@ function Home() {
                     </div>
                 </div>
                 <div className='home_button-wrapper btn-group w-100 row' role='group' aria-label='match button'>
-                    <button type='button' className='sat_button btn-l col-6'>Saturday 01/29 Matches</button>
-                    <button type='button' className='sun_button btn-l col-6'>Sunday 01/30 Matches</button>
+                    <button type='button' className='sat_button btn-l col-6' onClick={showSat}>Saturday 01/29 Matches</button>
+                    <button type='button' className='sun_button btn-l col-6' onClick={showSun}>Sunday 01/30 Matches</button>
                 </div>
                 <div className='home_match_wrapper row'>
-                    {matchDiv(0)}
+                       {(disArr[0]==='')? matchDiv(0) : null}
+                  
+                        {(disArr[1]==='')? matchDiv(1) : null}
                 </div>
             </div>
         </div>
