@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Roboto&display=swap');
-
 .home {
     position:static;
     width: 100%;
     margin: 0 auto;
     padding: 0;
     height: calc(100vh - 120px);
-    overflow-y: hidden;
+    overflow-y: scroll;
     font-family: 'Chakra Petch', 'Courier New', Courier, monospace;
 }
 .home::before {
@@ -26,13 +24,14 @@
     flex-direction: column;
     width: 394px;
     margin: auto;
-    padding: 10px;
+    padding: 5px;
     position: relative;
     align-items: center;
     justify-content: center;
     color: white;
 }
 .home_header {
+    height: 50px;
     color: darkslategray;
     font-size: 16pt;
     display: flex;
@@ -54,6 +53,7 @@
     font-weight: 600;
 }
 .home_button_wrapper {
+    height: 72px;
     display: flex;
     width: 100%;
     margin: 0px;
@@ -65,8 +65,22 @@
 button {
     color: darkslategray;
     font-size: 16pt;
-    background-color: rgb(231, 136, 68);
+    background-color: rgb(228, 169, 142);
     font-weight: bold;
     border: 3px solid gray;
     width: 100%;
+}
+.home_match_wrapper {
+    height: calc(100vh - 292px);
+    overflow-y: scroll;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 3px;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+.home_match {
+    font-size: 60pt;
 }

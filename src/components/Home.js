@@ -17,6 +17,26 @@ function Home() {
                     <button type='button' className='sat_button btn-l col-6'>Saturday Matches</button>
                     <button type='button' className='sun_button btn-l col-6'>Sunday Matches</button>
                 </div>
+                <div className='home_match_wrapper row'>
+                    <div className='home_match row'>
+                        Arsenal
+                    </div>
+                    <div className='home_match row'>
+                        Arsenal
+                    </div>
+                    <div className='home_match row'>
+                        Arsenal
+                    </div>
+                    <div className='home_match row'>
+                        Arsenal
+                    </div>
+                    <div className='home_match row'>
+                        Arsenal gh
+                    </div>
+                    <div className='home_match row'>
+                        Arsenal
+                    </div>
+                </div>
             </div>
         </div>
     )
