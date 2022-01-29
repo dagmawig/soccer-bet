@@ -15,10 +15,10 @@
 .header_row {
     display: flex;
     width: 100%;
-    margin: 0px;
+    margin: auto;
     padding: 0px;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: center; 
     height: 100%;
     color: white;
 }

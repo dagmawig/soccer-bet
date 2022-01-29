@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Roboto&display=swap');
+
 .home {
     position:static;
     width: 100%;
     margin: 0 auto;
     padding: 0;
     height: calc(100vh - 120px);
-    overflow-y: scroll;
-    font-family: 'Courier New', Courier, monospace;
+    overflow-y: hidden;
+    font-family: 'Chakra Petch', 'Courier New', Courier, monospace;
 }
 .home::before {
     content: '';
@@ -20,13 +22,51 @@
     background-size:contain;
 }
 .home_row {
-    min-height: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin: 0px;
+    width: 394px;
+    margin: auto;
     padding: 10px;
     position: relative;
     align-items: center;
+    justify-content: center;
     color: white;
+}
+.home_header {
+    color: darkslategray;
+    font-size: 16pt;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 3px;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+.home_header_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding: 3px;
+    font-size: 18pt;
+    font-weight: 600;
+}
+.home_button_wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 3px;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+button {
+    color: darkslategray;
+    font-size: 16pt;
+    background-color: rgb(231, 136, 68);
+    font-weight: bold;
+    border: 3px solid gray;
+    width: 100%;
 }
