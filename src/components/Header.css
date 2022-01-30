@@ -16,17 +16,27 @@
 .header_row {
     display: flex;
     width: 100%;
-    margin: auto;
+    margin: 0;
     padding: 0px;
-    align-items: center;
-    justify-content: center; 
+    align-items: flex-start;
+    justify-content: space-between; 
     height: 100%;
     color: white;
+    background-image: url(../images/title_icon_latest.png);
 }
-
-.header_img {
+.logout_button_wrapper {
+    padding-right: 0;
+}
+.reset_button_wrapper {
+    padding-left: 0;
+}
+.logout_button .reset_button {
+  
+    border:  5px solid red;
+}
+/* .header_img {
     margin-top: 0;
     padding-top: 0;
     height: 115px;
     opacity: .8;
-}
+} */
