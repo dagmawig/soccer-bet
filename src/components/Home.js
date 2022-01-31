@@ -117,7 +117,7 @@ function Home() {
         let matchArr = (fixture[day].success) ? fixture[day].data : [];
         const ans = (matchArr.length === 0) ? (
             <div className='home_match row'>
-                No match this {dayArr[day]}!
+                <b>No match this {dayArr[day]}!</b>
             </div>
         ) : matchArr.map((fixture) => {
             return (
@@ -174,14 +174,15 @@ function Home() {
                         WEEKEND MATCHES
                     </div>
                 </div>
-                <div className='home_button-wrapper btn-group w-100 row' role='group' aria-label='match button'>
-                    <button type='button' className='sat_button btn-l col-6' onClick={showSat}>Saturday 01/29 Matches</button>
-                    <button type='button' className='sun_button btn-l col-6' onClick={showSun}>Sunday 01/30 Matches</button>
+                <div className='home_button_wrapper row' >
+                        <button type='button' className='sat_button btn col-5' onClick={showSat}>Saturday 01/29</button>
+                        <button type='button' className='sun_button btn col-5' onClick={showSun}>Sunday 01/30</button>
+                  
                 </div>
                 <div className='home_match_wrapper row'>
-                       {(disArr[0]==='')? matchDiv(0) : null}
-                  
-                        {(disArr[1]==='')? matchDiv(1) : null}
+                    {(disArr[0] === '') ? matchDiv(0) : null}
+
+                    {(disArr[1] === '') ? matchDiv(1) : null}
                 </div>
             </div>
         </div>

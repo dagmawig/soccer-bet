@@ -1,0 +1,108 @@
+.history {
+    position:static;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    height: calc(100vh - 165px);
+    font-family: 'Chakra Petch', 'Courier New', Courier, monospace;
+}
+.history::before {
+    content: '';
+    position: absolute;
+    top: 115px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-image: url("../images/background_latest.jpg");
+    opacity: 0.4;
+    background-repeat:repeat;
+    background-size:contain;
+}
+.history_row {
+    height: calc(100vh - 165px);
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 394px;
+    margin: auto;
+    padding: 5px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.history_header {
+    position: fixed;
+    top: 115px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 45px;
+    color: darkslategray;
+    font-size: 16pt;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 3px;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+.history_header_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding: 3px;
+    font-size: 18pt;
+    font-weight: 600;
+}
+.history_wrapper {
+    height: calc(100vh - 210px);
+    overflow-y: scroll;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    margin-top: 42px;
+    padding: 3px;
+    align-items: flex-start;
+    justify-content: center; 
+    z-index: 5;
+}
+.history_date_wrapper {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 5px;
+    padding: 3px;
+    padding-bottom: 0px;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+    border: gray solid 3px;
+    border-radius: 10px;
+}
+.history_date {
+    text-align: right;
+}
+.history_match_wrapper {
+    color: darkslategray;
+    font-size: 10pt;
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 3px;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+    border-bottom: gray solid 2px;
+}
+.history_teams {
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+}
+.history_prediction_text .history_prediction_score .history_actual_text .history_actual_score .history_points_text .history_points {
+    font-weight: bold;
+    font-size: 12pt;
+}

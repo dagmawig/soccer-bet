@@ -3,14 +3,13 @@
     width: 100%;
     margin: 0 auto;
     padding: 0;
-    height: calc(100vh - 120px);
-    overflow-y: scroll;
+    height: calc(100vh - 165px);
     font-family: 'Chakra Petch', 'Courier New', Courier, monospace;
 }
 .home::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: 115px;
     right: 0;
     left: 0;
     bottom: 0;
@@ -20,6 +19,8 @@
     background-size:contain;
 }
 .home_row {
+    height: calc(100vh - 165px);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     width: 394px;
@@ -30,7 +31,12 @@
     justify-content: center;
 }
 .home_header {
-    height: 50px;
+    position: fixed;
+    top: 115px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 45px;
     color: darkslategray;
     font-size: 16pt;
     display: flex;
@@ -52,18 +58,32 @@
     font-weight: 600;
 }
 .home_button_wrapper {
-    height: 72px;
+    position: fixed;
+    top: 160px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 40px;
     display: flex;
     width: 100%;
     margin: 0px;
+    padding: 0 8px;
+    align-items: center;
+    justify-content: space-evenly; 
+    z-index: 5;
+}
+.home_button_grp {
+    display: flex;
+    width: 100%;
+    margin: 10px;
     padding: 3px;
     align-items: center;
     justify-content: center; 
-    z-index: 5;
+    z-index: 5;  
 }
 button {
     color: darkslategray;
-    font-size: 16pt;
+    font-size: 12pt;
     background-color: rgb(228, 169, 142);
     font-weight: bold;
     border: 3px solid gray;
@@ -71,11 +91,12 @@ button {
     border-radius: 10px;
 }
 .home_match_wrapper {
-    height: calc(100vh - 292px);
+    height: calc(100vh - 250px);
     overflow-y: scroll;
     display: flex;
     width: 100%;
     margin: 0px;
+    margin-top: 85px;
     padding: 3px;
     align-items: flex-start;
     justify-content: center; 
