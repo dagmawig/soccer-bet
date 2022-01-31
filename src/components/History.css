@@ -102,7 +102,7 @@
     font-size: 12pt;
     font-weight: bold;
 }
-.history_prediction_text .history_prediction_score .history_actual_text .history_actual_score .history_points_text .history_points {
+.history_prediction_text, .history_prediction_score, .history_actual_text, .history_actual_score, .history_points_text, .history_points {
     font-weight: bold;
-    font-size: 12pt;
+    font-style: italic;
 }

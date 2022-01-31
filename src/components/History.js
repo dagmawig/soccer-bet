@@ -184,7 +184,7 @@ function History() {
                     Points Won:
                 </div>
                 <div className='history_points col-6'>
-                    {`${historyObj.points}`}
+                    {`${historyObj.points} `} {thumb(historyObj.points)}
                 </div>
             </div>
         )
