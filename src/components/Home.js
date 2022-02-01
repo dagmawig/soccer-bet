@@ -175,9 +175,9 @@ function Home() {
                     </div>
                 </div>
                 <div className='home_button_wrapper row' >
-                        <button type='button' className='sat_button btn col-5' onClick={showSat}>Saturday 01/29</button>
-                        <button type='button' className='sun_button btn col-5' onClick={showSun}>Sunday 01/30</button>
-                  
+                   {(disArr[0]==='')? (<><button type='button' className='sat_button btn col-5 active' onClick={showSat}><b>Saturday 01/29</b></button>
+                    <button type='button' className='sun_button btn col-5' onClick={showSun}><b>Sunday 01/30</b></button></>) : (<><button type='button' className='sat_button btn col-5' onClick={showSat}><b>Saturday 01/29</b></button>
+                    <button type='button' className='sun_button btn col-5 active' onClick={showSun}><b>Sunday 01/30</b></button></>)}
                 </div>
                 <div className='home_match_wrapper row'>
                     {(disArr[0] === '') ? matchDiv(0) : null}

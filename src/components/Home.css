@@ -94,22 +94,24 @@ button {
     height: calc(100vh - 250px);
     overflow-y: scroll;
     display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 0px;
     margin-top: 85px;
     padding: 3px;
-    align-items: flex-start;
-    justify-content: center; 
+    align-items: center;
+    justify-content: left; 
     z-index: 5;
 }
-.match_message {
+.home_day_title {
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin: 10px, auto;
     padding: 3px;
-    font-size: 20pt;
+    font-size: 13pt;
     font-weight: 600;
 }
 .home_match  {
@@ -183,6 +185,8 @@ button {
     width: 100px;
     height: 133px
 }
-
+.active {
+    background-color: rgb(202, 69, 69);
+}
 
 
