@@ -94,13 +94,12 @@ button {
     height: calc(100vh - 250px);
     overflow-y: scroll;
     display: flex;
-    flex-direction: column;
     width: 100%;
     margin: 0px;
     margin-top: 85px;
     padding: 3px;
-    align-items: center;
-    justify-content: left; 
+    align-items: flex-start;
+    justify-content: center; 
     z-index: 5;
 }
 .home_day_title {
