@@ -1,0 +1,37 @@
+.loading {
+    position: fixed;
+    left: 0;
+    top: 115px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background-color: transparent;
+    z-index: 1051;
+}
+.loading_row {
+    background-color: lightgray;
+    opacity: .5;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display:flex;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+.fa-spinner {
+    position: fixed;
+    margin:0;
+    margin-bottom: 80px;;
+    padding: 0;
+    color: rgb(58, 21, 3);
+}
+.text {
+    margin:0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    color: rgb(58, 21, 3);
+    font-size: 16pt;
+}

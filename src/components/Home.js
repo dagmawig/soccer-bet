@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
-
+import axios from 'axios';
+import { setLoading, updateFixture, updateUserData } from './betSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
 function Home() {
 
     const [disArr, changeDis] = useState(['', 'none']);
+
+    const stateSelector = useSelector(state => state.bet);
+    const dispatch = useDispatch();
+    useEffect(() => {
+
+        async function loadUserData() {
+            let res = await axios.post('http://localhost:3001/loadData', { userID: localStorage.getItem("soccerBet_userID"), email: localStorage.getItem("email") });
+
+            return res;
+        }
+
+        dispatch(setLoading(true));
+
+        loadUserData()
+        .then(res => {
+            let data = res.data;
+
+            console.log(data);
+            if(data.success) {
+                dispatch(updateUserData(data.data.userData))
+                dispatch(updateFixture(data.data.fixture))
+                dispatch(setLoading(false));
+            }
+            else alert(data.err)
+           
+        })
+    }, []);
 
     let jObj = {
         "Leeds United": "Leeds",
@@ -31,67 +60,68 @@ function Home() {
         "Burnley": "Burnley"
     }
 
-    let fixture = [
-        {
-            "success": true,
-            "data": [
-                {
-                    "teamName": [
-                        "Manchester United",
-                        "Southampton"
-                    ],
-                    "score": null,
-                    "liveScore": null,
-                    "time": "12:30",
-                    "date": "2022-02-12"
-                },
-                {
-                    "teamName": [
-                        "Brentford",
-                        "Crystal Palace"
-                    ],
-                    "score": null,
-                    "liveScore": null,
-                    "time": "15:00",
-                    "date": "2022-02-12"
-                },
-                {
-                    "teamName": [
-                        "Everton",
-                        "Leeds United"
-                    ],
-                    "score": null,
-                    "liveScore": null,
-                    "time": "15:00",
-                    "date": "2022-02-12"
-                },
-                {
-                    "teamName": [
-                        "Watford",
-                        "Brighton &amp; Hove Albion"
-                    ],
-                    "score": null,
-                    "liveScore": null,
-                    "time": "15:00",
-                    "date": "2022-02-12"
-                },
-                {
-                    "teamName": [
-                        "Norwich City",
-                        "Manchester City"
-                    ],
-                    "score": null,
-                    "liveScore": null,
-                    "time": "17:30",
-                    "date": "2022-02-12"
-                }
-            ]
-        },
-        {
-            "success": false,
-            "message": "no games on this date"
-        }
-    ]
+    let fixture = stateSelector.fixture;
+    // let fixture = [
+    //     {
+    //         "success": true,
+    //         "data": [
+    //             {
+    //                 "teamName": [
+    //                     "Manchester United",
+    //                     "Southampton"
+    //                 ],
+    //                 "score": null,
+    //                 "liveScore": null,
+    //                 "time": "12:30",
+    //                 "date": "2022-02-12"
+    //             },
+    //             {
+    //                 "teamName": [
+    //                     "Brentford",
+    //                     "Crystal Palace"
+    //                 ],
+    //                 "score": null,
+    //                 "liveScore": null,
+    //                 "time": "15:00",
+    //                 "date": "2022-02-12"
+    //             },
+    //             {
+    //                 "teamName": [
+    //                     "Everton",
+    //                     "Leeds United"
+    //                 ],
+    //                 "score": null,
+    //                 "liveScore": null,
+    //                 "time": "15:00",
+    //                 "date": "2022-02-12"
+    //             },
+    //             {
+    //                 "teamName": [
+    //                     "Watford",
+    //                     "Brighton &amp; Hove Albion"
+    //                 ],
+    //                 "score": null,
+    //                 "liveScore": null,
+    //                 "time": "15:00",
+    //                 "date": "2022-02-12"
+    //             },
+    //             {
+    //                 "teamName": [
+    //                     "Norwich City",
+    //                     "Manchester City"
+    //                 ],
+    //                 "score": null,
+    //                 "liveScore": null,
+    //                 "time": "17:30",
+    //                 "date": "2022-02-12"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         "success": false,
+    //         "message": "no games on this date"
+    //     }
+    // ]
 
     function showSat(e) {
         changeDis(['', 'none']);
@@ -175,9 +205,9 @@ function Home() {
                     </div>
                 </div>
                 <div className='home_button_wrapper row' >
-                   {(disArr[0]==='')? (<><button type='button' className='sat_button btn col-5 active' onClick={showSat}><b>Saturday 01/29</b></button>
-                    <button type='button' className='sun_button btn col-5' onClick={showSun}><b>Sunday 01/30</b></button></>) : (<><button type='button' className='sat_button btn col-5' onClick={showSat}><b>Saturday 01/29</b></button>
-                    <button type='button' className='sun_button btn col-5 active' onClick={showSun}><b>Sunday 01/30</b></button></>)}
+                    {(disArr[0] === '') ? (<><button type='button' className='sat_button btn col-5 active' onClick={showSat}><b>Saturday 01/29</b></button>
+                        <button type='button' className='sun_button btn col-5' onClick={showSun}><b>Sunday 01/30</b></button></>) : (<><button type='button' className='sat_button btn col-5' onClick={showSat}><b>Saturday 01/29</b></button>
+                            <button type='button' className='sun_button btn col-5 active' onClick={showSun}><b>Sunday 01/30</b></button></>)}
                 </div>
                 <div className='home_match_wrapper row'>
                     {(disArr[0] === '') ? matchDiv(0) : null}

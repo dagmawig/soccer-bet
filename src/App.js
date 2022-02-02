@@ -8,33 +8,46 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Reset from './components/PassReset';
+import Loading from './components/Loading';
 
 function App() {
 
   let homePage = (localStorage.getItem("soccerBet_userID")) ? (<>
     <Header />
+    <Loading />
     <Home />
     <Footer />
   </>) : (
-    <Login />
+    <>
+      <Loading />
+      <Login />
+    </>
   )
 
   let historyPage = (localStorage.getItem("soccerBet_userID")) ? (<>
     <Header />
+    <Loading />
     <History />
     <Footer />
   </>) : (
-    <Login />
+    <>
+      <Loading />
+      <Login />
+    </>
   )
 
   let signUp = (localStorage.getItem("soccerBet_userID")) ? (
     <>
       <Header />
+      <Loading />
       <Home />
       <Footer />
     </>
   ) : (
+    <>
+    <Loading/>
     <SignUp />
+    </>
   )
 
   let empty = <div>
@@ -44,7 +57,7 @@ function App() {
 
   return (
     // <div className='App'><Login/></div>
-    
+
     <Router >
       <div className='App'>
         <Routes>

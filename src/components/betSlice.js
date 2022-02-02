@@ -1,9 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
+    loading: false,
     userData: {
         userID: ''
-    }
+    },
+    fixture: []
 };
 
 export const betSlice = createSlice({
@@ -13,12 +15,21 @@ export const betSlice = createSlice({
         setUserID: (state, action) => {
             state.userData.userID = action.payload;
         },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        },
+        updateUserData: (state, action) => {
+            state.userData = action.payload;
+        },
+        updateFixture: (state, action) => {
+            state.fixture = action.payload;
+        },
         reset: (state) => {
-            state = initialState
+            state = initialState;
         }
     }
 });
 
-export const { setUserID, reset } = betSlice.actions;
+export const { setUserID, reset, setLoading, updateUserData, updateFixture } = betSlice.actions;
 
 export default betSlice.reducer;
