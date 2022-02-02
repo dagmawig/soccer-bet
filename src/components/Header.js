@@ -1,7 +1,21 @@
 import React from "react";
 import './Header.css';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { reset } from './betSlice';
 
 function Header() {
+
+    const dispatch = useDispatch();
+
+    function logout() {
+        localStorage.setItem("soccerBet_userID", "");
+
+        dispatch(reset());
+
+        window.location.reload();
+    }
+
     return (
         <div className="header container">
             <div className="header_row row">
@@ -11,7 +25,7 @@ function Header() {
                     </button>
                 </div>
                 <div className="logout_button_wrapper col-3">
-                    <button className="logout_button btn">
+                    <button className="logout_button btn" onClick={logout}>
                         <i className="fa fa-power-off fa-lg"></i>
                     </button>
                 </div>

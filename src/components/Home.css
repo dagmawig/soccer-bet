@@ -150,6 +150,7 @@ button {
     text-align: center;
     border: 2px solid gray;
     border-radius: 10px;
+    font-weight: bold;
 }
 .match_team_info {
     font-size: 14px;
@@ -174,6 +175,7 @@ button {
     width: 100%;
     text-align: center;
     height: 42px;
+    font-weight: bold;
 }
 .bet_button {
     width: 90%;
