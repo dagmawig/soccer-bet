@@ -3,9 +3,15 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
     loading: false,
     userData: {
-        userID: ''
+        userID: '',
+        email: '',
+        name: '',
+        betData: {
+            currentBet: [],
+            betHistory: []
+        }
     },
-    fixture: []
+    fixture: [{success: false}, {success: false} ]
 };
 
 export const betSlice = createSlice({
