@@ -199,6 +199,31 @@ function Home() {
 
     }
 
+    function handleReset() {
+        async function reset() {
+            let res = await axios.post('http://localhost:3001/reset', { userID: localStorage.getItem("soccerBet_userID") });
+
+            return res;
+        }
+
+        dispatch(setLoading(true));
+        window.$('#resetAccount').modal('hide');
+
+        reset().then(res => {
+            let data = res.data;
+            if (data.success) {
+                dispatch(updateUserData(data.data.userData))
+                dispatch(setLoading(false));
+                alert("Account Reset Success!");
+            }
+            else {
+                dispatch(setLoading(false));
+                alert(data.err)
+            }
+        })
+    }
+
+
     function handleClose() {
         changeBetScore(['', '']);
         changeTeam([]);
@@ -465,6 +490,26 @@ function Home() {
                         <div className="modal-footer">
                             <button type="button" onClick={handleDeleteBet} className="btn modal_bet_button">DELETE</button>
                             <button type="button" onClick={handleClose} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal" id='resetAccount' tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header row">
+                            <h5 className="modal-title col-9">Account Reset</h5>
+                            <button type="button" className="close col-3" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body row">
+                            {`Are you sure you want to reset account?`}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" onClick={handleReset} className="btn modal_bet_button">Reset</button>
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

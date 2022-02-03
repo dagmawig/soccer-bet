@@ -3,6 +3,9 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset } from './betSlice';
+import axios from 'axios';
+import { setLoading, updateUserData } from './betSlice';
+
 
 function Header() {
 
@@ -16,11 +19,16 @@ function Header() {
         window.location.reload();
     }
 
+    function openReset() {
+        window.$('#resetAccount').modal('show');
+    }
+
+    
     return (
         <div className="header container">
             <div className="header_row row">
                 <div className="reset_button_wrapper col-3">
-                    <button className="reset_button btn">
+                    <button className="reset_button btn" onClick={openReset}>
                         <i className="fa fa-refresh fa-lg"></i>
                     </button>
                 </div>
@@ -31,6 +39,8 @@ function Header() {
                 </div>
                 {/* <img className='header_img' src={process.env.PUBLIC_URL + '/image/title_icon_latest.png'} /> */}
             </div>
+
+            
         </div>
     )
 }

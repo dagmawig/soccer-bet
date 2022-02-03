@@ -231,6 +231,9 @@ button {
 .modal_bet_button {
     background-color: rgb(202, 69, 69);
 }
+.modal {
+    z-index: 1051;
+}
 /* .modal_team_name1 {
     margin-right: 0;
     padding-right: 0;
