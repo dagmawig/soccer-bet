@@ -76,7 +76,16 @@ function Home() {
         return false;
     }
 
+    function indexOfBet(teamName, betArr) {
+        for (let i=0; i<betArr.length; i++) {
+            if (betArr[i].teams[0] === teamName[0] && betArr[i].teams[1] === teamName[1]) return i;
+        }
+
+        return false;
+    }
+
     function openBet(e) {
+        changeBetScore(['', '']);
         let id = e.target.id;
         let fIndex = parseInt(id[0]);
         let sIndex = parseInt(id[1]);
@@ -85,15 +94,33 @@ function Home() {
         console.log(e.target.id)
         window.$('#betOnMatch').modal('show');
     }
+    function openUpdateBet(e) {
+        changeBetScore(['', '']);
+        let id = e.target.id;
+        let fIndex = parseInt(id[0]);
+        let sIndex = parseInt(id[1]);
+        changeTeam(fixture[fIndex].data[sIndex].teamName);
+        changeGameDate(fixture[fIndex].data[sIndex].date)
+        console.log(e.target.id)
+        window.$('#updateBetOnMatch').modal('show');
+    }
+    function openDeleteBet(e) {
+        changeBetScore(['', '']);
+        let id = e.target.id;
+        let fIndex = parseInt(id[0]);
+        let sIndex = parseInt(id[1]);
+        changeTeam(fixture[fIndex].data[sIndex].teamName);
+        window.$('#deleteBetOnMatch').modal('show');
+    }
     function handleBet() {
         if (betScore[0] === '' || betScore[1] === '') {
             alert("Please enter score prediction");
             return;
         }
-        let score = [parseInt(betScore[0]), parseInt(betScore[1])]
+        let score = [parseInt(betScore[0]), parseInt(betScore[1])];
         console.log(betScore)
         async function betOnMatch() {
-            let res = await axios.post('http://localhost:3001/betOnMatch', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, gameDate: gameDate, betSCore: score });
+            let res = await axios.post('http://localhost:3001/betOnMatch', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, gameDate: gameDate, betScore: score });
 
             return res;
         }
@@ -115,6 +142,61 @@ function Home() {
                 alert(data.err)
             }
         })
+    }
+
+    function handleUpdateBet() {
+        if (betScore[0] === '' || betScore[1] === '') {
+            alert("Please enter score prediction");
+            return;
+        }
+        let score = [parseInt(betScore[0]), parseInt(betScore[1])];
+        console.log(betScore);
+        async function updateBetOnMatch() {
+            let res = await axios.post('http://localhost:3001/updateBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, betScore: score });
+
+            return res;
+        }
+
+        dispatch(setLoading(true));
+        window.$('#updateBetOnMatch').modal('hide');
+
+        updateBetOnMatch().then(res => {
+            let data = res.data;
+            if (data.success) {
+                dispatch(updateUserData(data.data.userData))
+                dispatch(setLoading(false));
+                alert("Bet Update Success!");
+            }
+            else {
+                dispatch(setLoading(false));
+                alert(data.err)
+            }
+        })
+    }
+
+    function handleDeleteBet() {
+        async function deleteBetOnMatch() {
+            let res = await axios.post('http://localhost:3001/removeBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr });
+
+            return res;
+        }
+
+        dispatch(setLoading(true));
+        window.$('#deleteBetOnMatch').modal('hide');
+
+        deleteBetOnMatch().then(res => {
+            let data = res.data;
+            if (data.success) {
+                dispatch(updateUserData(data.data.userData))
+                dispatch(setLoading(false));
+                alert("Bet Deletion Success!");
+            }
+            else {
+                dispatch(setLoading(false));
+                alert(data.err)
+            }
+        })
+
     }
 
     function handleClose() {
@@ -251,7 +333,13 @@ function Home() {
                             </div>
                         </div>
                         <div className='bet_button_wrapper col-6'>
-                            <button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openBet}>{(teamsInBet(fixture.teamName, currentBet)) ? 'UPDATE BET' : 'BET'}</button>
+                            {(teamsInBet(fixture.teamName, currentBet)) ? (<div className='button_grp row'>
+                            <div className="bet_score_text">
+                                Your Bet: {`${currentBet[indexOfBet(fixture.teamName, currentBet)].betScore[0]} - ${currentBet[indexOfBet(fixture.teamName, currentBet)].betScore[1]}`}
+                            </div>
+                            <button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openUpdateBet}>UPDATE BET</button>
+                            <button type='button' id={`${day}${i}-delete`} className='bet_button delete_button btn btn-sm' onClick={openDeleteBet}>DELETE BET</button>
+                            </div>) : <button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openBet}>BET</button>}
                         </div>
                         <div className='match_team_info col-3'>
                             <div className='match_team_jersey row'>
@@ -322,7 +410,60 @@ function Home() {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={handleBet} className="btn btn-primary">BET</button>
+                            <button type="button" onClick={handleBet} className="btn modal_bet_button">BET</button>
+                            <button type="button" onClick={handleClose} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="modal" id='updateBetOnMatch' tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header row">
+                            <h5 className="modal-title col-9">Update Bet On Match</h5>
+                            <button type="button" onClick={handleClose} className="close col-3" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body row">
+                            <div className="input-group input-group-sm modal_team_name1 mb-3 col-6">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text" >{teamArr[0]}</span>
+                                </div>
+                                <input type="number" value={betScore[0]} onChange={(e) => changeBetScore([e.target.value, betScore[1]])} className="form-control" aria-label="team 1" placeholder='0' aria-describedby="inputGroup-sizing-sm" />
+                            </div>
+                            <div className="input-group input-group-sm modal_team_name2 mb-3 col-6">
+                                <input type="number" value={betScore[1]} onChange={(e) => changeBetScore([betScore[0], e.target.value])} className="form-control" placeholder="0" aria-label="team 2" aria-describedby="inputGroup-sizing-sm" />
+                                <div className="input-group-append">
+                                    <span className="input-group-text" id="basic-addon2">{teamArr[1]}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" onClick={handleUpdateBet} className="btn modal_bet_button">BET</button>
+                            <button type="button" onClick={handleClose} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="modal" id='deleteBetOnMatch' tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header row">
+                            <h5 className="modal-title col-9">Delete Bet On Match</h5>
+                            <button type="button" onClick={handleClose} className="close col-3" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body row">
+                            {`Want to delete bet on ${teamArr[0]} vs ${teamArr[1]}?`}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" onClick={handleDeleteBet} className="btn modal_bet_button">DELETE</button>
                             <button type="button" onClick={handleClose} className="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>

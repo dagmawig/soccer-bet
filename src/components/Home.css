@@ -177,6 +177,9 @@ button {
     height: 42px;
     font-weight: bold;
 }
+.bet_button_wrapper {
+    height: 100px;
+}
 .bet_button {
     width: 90%;
     border-radius: 10px;
@@ -189,6 +192,24 @@ button {
 .active {
     background-color: rgb(202, 69, 69);
 }
+.button_grp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    padding: 3px;
+    align-items: center;
+    justify-content:space-between; 
+    z-index: 5;
+}
+.bet_score_text {
+    font-weight: bold;
+}
+.delete_button {
+    margin-top: 3px;
+    width: 70%;
+    background-color: rgb(202, 69, 69);
+}
 .modal {
     margin-top: 10%;
 }
@@ -199,6 +220,16 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.modal-content {
+    background-color: rgb(228, 169, 142);
+}
+.modal-header {
+    width: 100%;
+    margin: auto;
+}
+.modal_bet_button {
+    background-color: rgb(202, 69, 69);
 }
 /* .modal_team_name1 {
     margin-right: 0;
