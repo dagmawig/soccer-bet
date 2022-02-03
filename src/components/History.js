@@ -1,7 +1,11 @@
 import React from 'react';
 import './History.css';
+import { useSelector } from 'react-redux';
 
 function History() {
+
+    const stateSelector = useSelector(state => state.bet);
+    let betHistory = stateSelector.userData.betData.betHistory;  
     let betHistoryArr = [
         {
             "gameDate": "2022-01-22T00:00:00.000Z",
@@ -135,7 +139,7 @@ function History() {
         return arr;
     }
 
-    let grpArr = groupArr(betHistoryArr);
+    let grpArr = groupArr(betHistory);
     console.log(grpArr);
     
     function historyListDiv(groupArr) {
@@ -210,7 +214,6 @@ function History() {
                     </div>
                 </div>
                 <div className='history_wrapper row'>
-                   {historyListDiv(grpArr)}
                    {historyListDiv(grpArr)}
                 </div>
             </div>
