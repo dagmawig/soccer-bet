@@ -77,7 +77,7 @@ function Home() {
     }
 
     function indexOfBet(teamName, betArr) {
-        for (let i=0; i<betArr.length; i++) {
+        for (let i = 0; i < betArr.length; i++) {
             if (betArr[i].teams[0] === teamName[0] && betArr[i].teams[1] === teamName[1]) return i;
         }
 
@@ -223,6 +223,17 @@ function Home() {
         })
     }
 
+    function handleBetInput(e) {
+        if (e.key === 'Enter') {
+           handleBet(e);
+        }
+    }
+
+    function handleUpdateInput(e) {
+        if (e.key === 'Enter') {
+            handleUpdateBet(e);
+        }
+    }
 
     function handleClose() {
         changeBetScore(['', '']);
@@ -308,6 +319,10 @@ function Home() {
 
         return [dateStr1, dateStr2];
     }
+    function getDay() {
+        let date = new Date();
+        return date.getUTCDay();
+    }
 
     function showSat(e) {
         changeDis(['', 'none']);
@@ -359,12 +374,17 @@ function Home() {
                         </div>
                         <div className='bet_button_wrapper col-6'>
                             {(teamsInBet(fixture.teamName, currentBet)) ? (<div className='button_grp row'>
-                            <div className="bet_score_text">
-                                Your Bet: {`${currentBet[indexOfBet(fixture.teamName, currentBet)].betScore[0]} - ${currentBet[indexOfBet(fixture.teamName, currentBet)].betScore[1]}`}
-                            </div>
-                            <button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openUpdateBet}>UPDATE BET</button>
-                            <button type='button' id={`${day}${i}-delete`} className='bet_button delete_button btn btn-sm' onClick={openDeleteBet}>DELETE BET</button>
-                            </div>) : <button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openBet}>BET</button>}
+                                <div className="bet_score_text">
+                                    Your Bet: {`${currentBet[indexOfBet(fixture.teamName, currentBet)].betScore[0]} - ${currentBet[indexOfBet(fixture.teamName, currentBet)].betScore[1]}`}
+                                </div>
+                                {(getDay() !== 0 && getDay() !== 6) ? (<><button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openUpdateBet}>UPDATE BET</button>
+                                    <button type='button' id={`${day}${i}-delete`} className='bet_button delete_button btn btn-sm' onClick={openDeleteBet}>DELETE BET</button></>) :
+                                    <div className='fixture_score'>
+                                        {(fixture.score !== null) ? `Score: ${fixture.score[0]} - ${fixture.score[1]}` : ((fixture.liveScore !== null) ? `Live Score: ${fixture.liveScore[0]} - ${fixture.liveScore[1]}\nLive Time: ${fixture.liveTime}` : null)}
+                                    </div>}
+                            </div>) : ((getDay() !== 0 && getDay() !== 6) ? (<button type='button' id={`${day}${i}-bet`} className='bet_button btn' onClick={openBet}>BET</button>) : <div className='fixture_score'>
+                                {(fixture.score !== null) ? `Score: ${fixture.score[0]} - ${fixture.score[1]}` : ((fixture.liveScore !== null) ? `Live Score: ${fixture.liveScore[0]} - ${fixture.liveScore[1]}\nLive Time: ${fixture.liveTime}` : null)}
+                            </div>)}
                         </div>
                         <div className='match_team_info col-3'>
                             <div className='match_team_jersey row'>
@@ -425,10 +445,10 @@ function Home() {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" >{teamArr[0]}</span>
                                 </div>
-                                <input type="number" value={betScore[0]} onChange={(e) => changeBetScore([e.target.value, betScore[1]])} className="form-control" aria-label="team 1" placeholder='0' aria-describedby="inputGroup-sizing-sm" />
+                                <input type="number" value={betScore[0]} onChange={(e) => changeBetScore([e.target.value, betScore[1]])} onKeyPress={handleBetInput} className="form-control" aria-label="team 1" placeholder='0' aria-describedby="inputGroup-sizing-sm" />
                             </div>
                             <div className="input-group input-group-sm modal_team_name2 mb-3 col-6">
-                                <input type="number" value={betScore[1]} onChange={(e) => changeBetScore([betScore[0], e.target.value])} className="form-control" placeholder="0" aria-label="team 2" aria-describedby="inputGroup-sizing-sm" />
+                                <input type="number" value={betScore[1]} onChange={(e) => changeBetScore([betScore[0], e.target.value])} onKeyPress={handleBetInput} className="form-control" placeholder="0" aria-label="team 2" aria-describedby="inputGroup-sizing-sm" />
                                 <div className="input-group-append">
                                     <span className="input-group-text" id="basic-addon2">{teamArr[1]}</span>
                                 </div>
@@ -457,10 +477,10 @@ function Home() {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" >{teamArr[0]}</span>
                                 </div>
-                                <input type="number" value={betScore[0]} onChange={(e) => changeBetScore([e.target.value, betScore[1]])} className="form-control" aria-label="team 1" placeholder='0' aria-describedby="inputGroup-sizing-sm" />
+                                <input type="number" value={betScore[0]} onChange={(e) => changeBetScore([e.target.value, betScore[1]])} onKeyPress={handleUpdateInput} className="form-control" aria-label="team 1" placeholder='0' aria-describedby="inputGroup-sizing-sm" />
                             </div>
                             <div className="input-group input-group-sm modal_team_name2 mb-3 col-6">
-                                <input type="number" value={betScore[1]} onChange={(e) => changeBetScore([betScore[0], e.target.value])} className="form-control" placeholder="0" aria-label="team 2" aria-describedby="inputGroup-sizing-sm" />
+                                <input type="number" value={betScore[1]} onChange={(e) => changeBetScore([betScore[0], e.target.value])} onKeyPress={handleUpdateInput} className="form-control" placeholder="0" aria-label="team 2" aria-describedby="inputGroup-sizing-sm" />
                                 <div className="input-group-append">
                                     <span className="input-group-text" id="basic-addon2">{teamArr[1]}</span>
                                 </div>
