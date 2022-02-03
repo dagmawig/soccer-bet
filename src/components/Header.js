@@ -1,10 +1,7 @@
 import React from "react";
 import './Header.css';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset } from './betSlice';
-import axios from 'axios';
-import { setLoading, updateUserData } from './betSlice';
 
 
 function Header() {

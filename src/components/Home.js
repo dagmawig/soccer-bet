@@ -17,7 +17,7 @@ function Home() {
     useEffect(() => {
 
         async function loadUserData() {
-            let res = await axios.post('http://localhost:3001/loadData', { userID: localStorage.getItem("soccerBet_userID"), email: localStorage.getItem("email") });
+            let res = await axios.post('https://soccer-bet.glitch.me/loadData', { userID: localStorage.getItem("soccerBet_userID"), email: localStorage.getItem("email") });
 
             return res;
         }
@@ -120,7 +120,7 @@ function Home() {
         let score = [parseInt(betScore[0]), parseInt(betScore[1])];
         console.log(betScore)
         async function betOnMatch() {
-            let res = await axios.post('http://localhost:3001/betOnMatch', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, gameDate: gameDate, betScore: score });
+            let res = await axios.post('https://soccer-bet.glitch.me/betOnMatch', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, gameDate: gameDate, betScore: score });
 
             return res;
         }
@@ -152,7 +152,7 @@ function Home() {
         let score = [parseInt(betScore[0]), parseInt(betScore[1])];
         console.log(betScore);
         async function updateBetOnMatch() {
-            let res = await axios.post('http://localhost:3001/updateBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, betScore: score });
+            let res = await axios.post('https://soccer-bet.glitch.me/updateBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr, betScore: score });
 
             return res;
         }
@@ -176,7 +176,7 @@ function Home() {
 
     function handleDeleteBet() {
         async function deleteBetOnMatch() {
-            let res = await axios.post('http://localhost:3001/removeBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr });
+            let res = await axios.post('https://soccer-bet.glitch.me/removeBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr });
 
             return res;
         }
@@ -201,7 +201,7 @@ function Home() {
 
     function handleReset() {
         async function reset() {
-            let res = await axios.post('http://localhost:3001/reset', { userID: localStorage.getItem("soccerBet_userID") });
+            let res = await axios.post('https://soccer-bet.glitch.me/reset', { userID: localStorage.getItem("soccerBet_userID") });
 
             return res;
         }
@@ -352,7 +352,7 @@ function Home() {
             </div>
         ) : matchArr.map((fixture, i) => {
             return (
-                <div className='home_match row'>
+                <div className='home_match row' key={`${i}-match`}>
                     <div className='match_time row'>
                         <div className='time_text col-6'>
                             {fixture.time} UK Time

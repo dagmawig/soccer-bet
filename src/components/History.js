@@ -144,31 +144,31 @@ function History() {
     
     function historyListDiv(groupArr) {
         console.log(groupArr);
-        return groupArr.map(group => {
-            return historyDateDiv(group.date, group.matchArr);
+        return groupArr.map((group, i) => {
+            return historyDateDiv(group.date, group.matchArr, i);
         })
     }
 
-    function historyDateDiv(date, historyArr) {
+    function historyDateDiv(date, historyArr, i) {
         console.log(date, historyArr);
         return (
-            <div className='history_date_wrapper row'>
+            <div className='history_date_wrapper row' key={`${i}-history-grp`}>
                 <div className='history_date col-12'>
                     {date}
                 </div>
-                {historyArr.map(history => {
+                {historyArr.map((history, i) => {
                     return (
-                        historyDiv(history)
+                        historyDiv(history,i)
                     )
                 })}
             </div>
         )
     } 
 
-    function historyDiv(historyObj) {
+    function historyDiv(historyObj, i) {
         console.log(historyObj);
         return (
-            <div className='history_match_wrapper row'>
+            <div className='history_match_wrapper row' key ={`${i}-history`}>
                 <div className='history_teams col-12'>
                     {`${historyObj.teams[0]} vs ${historyObj.teams[1]}`}
                 </div>
