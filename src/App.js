@@ -58,7 +58,7 @@ function App() {
   return (
     // <div className='App'><Login/></div>
 
-    <Router >
+    <Router basename={process.env.PUBLIC_URL} >
       <div className='App'>
         <Routes>
           <Route path='/home' element={homePage} />
