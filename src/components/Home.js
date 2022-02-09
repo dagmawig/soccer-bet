@@ -85,7 +85,7 @@ function Home() {
     }
 
     function openBet(e) {
-        changeBetScore(['', '']);
+        changeBetScore([0, 0]);
         let id = e.target.id;
         let fIndex = parseInt(id[0]);
         let sIndex = parseInt(id[1]);
