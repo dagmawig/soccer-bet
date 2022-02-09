@@ -64,16 +64,16 @@
     width: 100%;
     margin: 0px;
     margin-top: 42px;
-    padding: 3px;
+    padding-top: 3px;
     align-items: flex-start;
-    justify-content: center; 
+    justify-content: center;
     z-index: 5;
 }
 .history_date_wrapper {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    margin: auto;
-    margin-bottom: 5px;
+    margin: 5px;
     padding: 3px;
     padding-bottom: 0px;
     align-items: center;
@@ -83,7 +83,10 @@
     border-radius: 10px;
 }
 .history_date {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 100%;
 }
 .history_match_wrapper {
     color: darkslategray;

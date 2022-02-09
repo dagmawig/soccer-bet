@@ -153,7 +153,7 @@ function History() {
         console.log(date, historyArr);
         return (
             <div className='history_date_wrapper row' key={`${i}-history-grp`}>
-                <div className='history_date col-12'>
+                <div className='history_date row'>
                     {date}
                 </div>
                 {historyArr.map((history, i) => {
