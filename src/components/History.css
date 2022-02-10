@@ -36,7 +36,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    height: 45px;
+    height: 90px;
     color: darkslategray;
     font-size: 16pt;
     display: flex;
@@ -58,7 +58,7 @@
     font-weight: 600;
 }
 .history_wrapper {
-    height: calc(100vh - 210px);
+    height: calc(100vh - 260px);
     overflow-y: scroll;
     display: flex;
     width: 100%;

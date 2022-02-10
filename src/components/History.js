@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 function History() {
 
     const stateSelector = useSelector(state => state.bet);
-    let betHistory = stateSelector.userData.betData.betHistory;  
+    let betHistory = stateSelector.userData.betData.betHistory;
     let betHistoryArr = [
         {
             "gameDate": "2022-01-22T00:00:00.000Z",
@@ -110,11 +110,11 @@ function History() {
             ]
         }
     ];
-    
+
     function groupArr(betArr) {
         let arr = [];
-        for(let i=0; i<betArr.length; i++) {
-            if(arr.length===0 || arr[arr.length-1].date !==betArr[i].gameDate) {
+        for (let i = 0; i < betArr.length; i++) {
+            if (arr.length === 0 || arr[arr.length - 1].date !== betArr[i].gameDate) {
                 let obj = {};
                 obj.date = betArr[i].gameDate;
                 obj.matchArr = [{
@@ -132,25 +132,31 @@ function History() {
                     actualScore: betArr[i].actualScore,
                     points: betArr[i].points
                 };
-                arr[arr.length-1].matchArr.push(matchObj);
+                arr[arr.length - 1].matchArr.push(matchObj);
             }
         }
 
         return arr;
     }
 
+    function totalP(historyArr) {
+        let tot = 0;
+        for (let history of historyArr) {
+            tot += history.points;
+        }
+        return tot;
+    }
+
     let grpArr = groupArr(betHistory);
     console.log(grpArr);
-    
+
     function historyListDiv(groupArr) {
-        console.log(groupArr);
         return groupArr.map((group, i) => {
             return historyDateDiv(group.date, group.matchArr, i);
         })
     }
 
     function historyDateDiv(date, historyArr, i) {
-        console.log(date, historyArr);
         return (
             <div className='history_date_wrapper row' key={`${i}-history-grp`}>
                 <div className='history_date row'>
@@ -158,17 +164,16 @@ function History() {
                 </div>
                 {historyArr.map((history, i) => {
                     return (
-                        historyDiv(history,i)
+                        historyDiv(history, i)
                     )
                 })}
             </div>
         )
-    } 
+    }
 
     function historyDiv(historyObj, i) {
-        console.log(historyObj);
         return (
-            <div className='history_match_wrapper row' key ={`${i}-history`}>
+            <div className='history_match_wrapper row' key={`${i}-history`}>
                 <div className='history_teams col-12'>
                     {`${historyObj.teams[0]} vs ${historyObj.teams[1]}`}
                 </div>
@@ -195,13 +200,13 @@ function History() {
     }
 
     function thumb(points) {
-        if(points===5) return (
+        if (points === 5) return (
             <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         )
-        else if(points===2) return (
+        else if (points === 2) return (
             <i class="fa fa-meh-o" aria-hidden="true"></i>
         )
-        else if(points===0) return (
+        else if (points === 0) return (
             <i class="fa fa-thumbs-down" aria-hidden="true"></i>
         )
     }
@@ -210,11 +215,11 @@ function History() {
             <div className='history_row row'>
                 <div className='history_header row'>
                     <div className='history_header_title col-12'>
-                        BET HISTORY
+                        {`BET HISTORY\n`} <br/> {`Total Points: ${totalP(betHistory)}`}
                     </div>
                 </div>
                 <div className='history_wrapper row'>
-                   {historyListDiv(grpArr)}
+                    {historyListDiv(grpArr)}
                 </div>
             </div>
         </div>
