@@ -453,6 +453,9 @@ function Home() {
                                     <span className="input-group-text" id="basic-addon2">{teamArr[1]}</span>
                                 </div>
                             </div>
+                            <div className='rule col-12'>
+                                {`5 pts for accurate score prediction; 2pts for predicting the winner or a score tie; 0 pts other wise`}
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" onClick={handleBet} className="btn modal_bet_button">BET</button>

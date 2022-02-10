@@ -7,7 +7,7 @@ function Footer() {
         <div className="footer container">
             <div className="footer_row row">
                 <div className="footer_home col-6">
-                    <Link to='/home'>
+                    <Link to='/'>
                         <button className="footer_button">
                             <i className="fa fa-home fa-2x"></i>
                         </button>
