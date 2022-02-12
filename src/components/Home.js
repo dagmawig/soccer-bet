@@ -117,6 +117,10 @@ function Home() {
             alert("Please enter score prediction");
             return;
         }
+        if(getDay()===0 || getDay()===6) {
+            alert("You can't bet on game day!");
+            return;
+        }
         let score = [parseInt(betScore[0]), parseInt(betScore[1])];
         console.log(betScore)
         async function betOnMatch() {
@@ -149,6 +153,10 @@ function Home() {
             alert("Please enter score prediction");
             return;
         }
+        if(getDay()===0 || getDay()===6) {
+            alert("You can't update bet on game day!");
+            return;
+        }
         let score = [parseInt(betScore[0]), parseInt(betScore[1])];
         console.log(betScore);
         async function updateBetOnMatch() {
@@ -175,6 +183,10 @@ function Home() {
     }
 
     function handleDeleteBet() {
+        if(getDay()===0 || getDay()===6) {
+            alert("You can't delete bet on game day!");
+            return;
+        }
         async function deleteBetOnMatch() {
             let res = await axios.post('https://soccer-bet.glitch.me/removeBet', { userID: localStorage.getItem("soccerBet_userID"), teams: teamArr });
 
