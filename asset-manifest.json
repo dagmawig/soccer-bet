@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/soccer-bet/static/css/main.834bf344.css",
-    "main.js": "/soccer-bet/static/js/main.c586c72b.js",
+    "main.js": "/soccer-bet/static/js/main.2643e118.js",
     "static/media/background_latest.jpg": "/soccer-bet/static/media/background_latest.0323363117d577f17d0a.jpg",
     "index.html": "/soccer-bet/index.html",
     "main.834bf344.css.map": "/soccer-bet/static/css/main.834bf344.css.map",
-    "main.c586c72b.js.map": "/soccer-bet/static/js/main.c586c72b.js.map"
+    "main.2643e118.js.map": "/soccer-bet/static/js/main.2643e118.js.map"
   },
   "entrypoints": [
     "static/css/main.834bf344.css",
-    "static/js/main.c586c72b.js"
+    "static/js/main.2643e118.js"
   ]
 }
