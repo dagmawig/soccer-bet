@@ -20,7 +20,7 @@ function Header() {
         window.$('#resetAccount').modal('show');
     }
 
-    
+
     return (
         <div className="header container">
             <div className="header_row row">
@@ -34,10 +34,7 @@ function Header() {
                         <i className="fa fa-power-off fa-lg"></i>
                     </button>
                 </div>
-                {/* <img className='header_img' src={process.env.PUBLIC_URL + '/image/title_icon_latest.png'} /> */}
             </div>
-
-            
         </div>
     )
 }

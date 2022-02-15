@@ -6,111 +6,8 @@ function History() {
 
     const stateSelector = useSelector(state => state.bet);
     let betHistory = stateSelector.userData.betData.betHistory;
-    let betHistoryArr = [
-        {
-            "gameDate": "2022-01-22T00:00:00.000Z",
-            "points": 5,
-            "_id": "61ecaaad628b1a666758139b",
-            "teams": [
-                "Everton",
-                "Aston Villa"
-            ],
-            "betScore": [
-                0,
-                1
-            ],
-            "actualScore": [
-                "0",
-                "1"
-            ]
-        },
-        {
-            "gameDate": "2022-01-22T00:00:00.000Z",
-            "points": 5,
-            "_id": "61ecaaad628b1a666758139c",
-            "teams": [
-                "Brentford",
-                "Wolverhampton Wanderers"
-            ],
-            "betScore": [
-                1,
-                2
-            ],
-            "actualScore": [
-                "1",
-                "2"
-            ]
-        },
-        {
-            "gameDate": "2022-01-22T00:00:00.000Z",
-            "points": 0,
-            "_id": "61ecaaad628b1a666758139d",
-            "teams": [
-                "Leeds United",
-                "Newcastle United"
-            ],
-            "betScore": [
-                8,
-                8
-            ],
-            "actualScore": [
-                "0",
-                "1"
-            ]
-        },
-        {
-            "gameDate": "2022-01-22T00:00:00.000Z",
-            "points": 2,
-            "_id": "61ecaaad628b1a666758139e",
-            "teams": [
-                "Manchester United",
-                "West Ham United"
-            ],
-            "betScore": [
-                5,
-                0
-            ],
-            "actualScore": [
-                "1",
-                "0"
-            ]
-        },
-        {
-            "gameDate": "2022-01-23T00:00:00.000Z",
-            "points": 0,
-            "_id": "61f0cb27ccb9d096e04771d3",
-            "teams": [
-                "Arsenal",
-                "Burnley"
-            ],
-            "betScore": [
-                3,
-                1
-            ],
-            "actualScore": [
-                "0",
-                "0"
-            ]
-        },
-        {
-            "gameDate": "2022-01-23T00:00:00.000Z",
-            "points": 2,
-            "_id": "61f0cb27ccb9d096e04771d4",
-            "teams": [
-                "Crystal Palace",
-                "Liverpool"
-            ],
-            "betScore": [
-                1,
-                4
-            ],
-            "actualScore": [
-                "1",
-                "3"
-            ]
-        }
-    ];
-
+    
+    // method to structure history array for display
     function groupArr(betArr) {
         let arr = [];
         for (let i = 0; i < betArr.length; i++) {
@@ -139,6 +36,7 @@ function History() {
         return arr;
     }
 
+    // method to calculate total points won
     function totalP(historyArr) {
         let tot = 0;
         for (let history of historyArr) {
@@ -148,7 +46,6 @@ function History() {
     }
 
     let grpArr = groupArr(betHistory);
-    console.log(grpArr);
 
     function historyListDiv(groupArr) {
         return groupArr.map((group, i) => {
@@ -215,7 +112,7 @@ function History() {
             <div className='history_row row'>
                 <div className='history_header row'>
                     <div className='history_header_title col-12'>
-                        {`BET HISTORY\n`} <br/> {`Total Points: ${totalP(betHistory)}`}
+                        {`BET HISTORY\n`} <br /> {`Total Points: ${totalP(betHistory)}`}
                     </div>
                 </div>
                 <div className='history_wrapper row'>

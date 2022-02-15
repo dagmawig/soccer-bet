@@ -13,7 +13,6 @@ function Loading() {
                 <div className="col-12 text">Loading . . . </div>
             </div>
         </div>
-
     );
 }
 

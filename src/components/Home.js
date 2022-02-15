@@ -14,6 +14,8 @@ function Home() {
     const [betScore, changeBetScore] = useState(['', '']);
     const stateSelector = useSelector(state => state.bet);
     const dispatch = useDispatch();
+
+    // method used to refresh uesr data
     useEffect(() => {
 
         async function loadUserData() {
@@ -42,6 +44,7 @@ function Home() {
             })
     }, []);
 
+    // object used to form urls used to retrieve team jersies
     let jObj = {
         "Leeds United": "Leeds",
         "Arsenal": "Arsenal",
@@ -68,6 +71,7 @@ function Home() {
     let fixture = stateSelector.fixture;
     let currentBet = stateSelector.userData.betData.currentBet;
 
+    // checks if matchup is in users bet
     function teamsInBet(teamName, betArr) {
         for (let betObj of betArr) {
             if (betObj.teams[0] === teamName[0] && betObj.teams[1] === teamName[1]) return true;
@@ -76,6 +80,7 @@ function Home() {
         return false;
     }
 
+    //returns index of bet from bet array
     function indexOfBet(teamName, betArr) {
         for (let i = 0; i < betArr.length; i++) {
             if (betArr[i].teams[0] === teamName[0] && betArr[i].teams[1] === teamName[1]) return i;
@@ -84,6 +89,7 @@ function Home() {
         return false;
     }
 
+    // used to open bet modal
     function openBet(e) {
         changeBetScore([0, 0]);
         let id = e.target.id;
@@ -94,6 +100,8 @@ function Home() {
         console.log(e.target.id)
         window.$('#betOnMatch').modal('show');
     }
+
+    // used to open bet update modal
     function openUpdateBet(e) {
         changeBetScore(['', '']);
         let id = e.target.id;
@@ -104,6 +112,8 @@ function Home() {
         console.log(e.target.id)
         window.$('#updateBetOnMatch').modal('show');
     }
+
+    // used to open bet delete modal
     function openDeleteBet(e) {
         changeBetScore(['', '']);
         let id = e.target.id;
@@ -112,12 +122,14 @@ function Home() {
         changeTeam(fixture[fIndex].data[sIndex].teamName);
         window.$('#deleteBetOnMatch').modal('show');
     }
+
+    // used to handle bet request
     function handleBet() {
         if (betScore[0] === '' || betScore[1] === '') {
             alert("Please enter score prediction");
             return;
         }
-        if(getDay()===0 || getDay()===6) {
+        if (getDay() === 0 || getDay() === 6) {
             alert("You can't bet on game day!");
             return;
         }
@@ -148,12 +160,13 @@ function Home() {
         })
     }
 
+    // used to update handle bet request
     function handleUpdateBet() {
         if (betScore[0] === '' || betScore[1] === '') {
             alert("Please enter score prediction");
             return;
         }
-        if(getDay()===0 || getDay()===6) {
+        if (getDay() === 0 || getDay() === 6) {
             alert("You can't update bet on game day!");
             return;
         }
@@ -182,8 +195,9 @@ function Home() {
         })
     }
 
+    // used to handle delete bet request
     function handleDeleteBet() {
-        if(getDay()===0 || getDay()===6) {
+        if (getDay() === 0 || getDay() === 6) {
             alert("You can't delete bet on game day!");
             return;
         }
@@ -211,6 +225,7 @@ function Home() {
 
     }
 
+    // used to handle account reset request
     function handleReset() {
         async function reset() {
             let res = await axios.post('https://soccer-bet.glitch.me/reset', { userID: localStorage.getItem("soccerBet_userID") });
@@ -235,9 +250,10 @@ function Home() {
         })
     }
 
+    // methods used to let user use enter key on modals
     function handleBetInput(e) {
         if (e.key === 'Enter') {
-           handleBet(e);
+            handleBet(e);
         }
     }
 
@@ -247,79 +263,23 @@ function Home() {
         }
     }
 
+    // used to handle closing of modal
     function handleClose() {
         changeBetScore(['', '']);
         changeTeam([]);
         changeGameDate('');
     }
-    // let fixture = [
-    //     {
-    //         "success": true,
-    //         "data": [
-    //             {
-    //                 "teamName": [
-    //                     "Manchester United",
-    //                     "Southampton"
-    //                 ],
-    //                 "score": null,
-    //                 "liveScore": null,
-    //                 "time": "12:30",
-    //                 "date": "2022-02-12"
-    //             },
-    //             {
-    //                 "teamName": [
-    //                     "Brentford",
-    //                     "Crystal Palace"
-    //                 ],
-    //                 "score": null,
-    //                 "liveScore": null,
-    //                 "time": "15:00",
-    //                 "date": "2022-02-12"
-    //             },
-    //             {
-    //                 "teamName": [
-    //                     "Everton",
-    //                     "Leeds United"
-    //                 ],
-    //                 "score": null,
-    //                 "liveScore": null,
-    //                 "time": "15:00",
-    //                 "date": "2022-02-12"
-    //             },
-    //             {
-    //                 "teamName": [
-    //                     "Watford",
-    //                     "Brighton &amp; Hove Albion"
-    //                 ],
-    //                 "score": null,
-    //                 "liveScore": null,
-    //                 "time": "15:00",
-    //                 "date": "2022-02-12"
-    //             },
-    //             {
-    //                 "teamName": [
-    //                     "Norwich City",
-    //                     "Manchester City"
-    //                 ],
-    //                 "score": null,
-    //                 "liveScore": null,
-    //                 "time": "17:30",
-    //                 "date": "2022-02-12"
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         "success": false,
-    //         "message": "no games on this date"
-    //     }
-    // ]
+    
+
+    // used to format date
     function getDateStr(date) {
-        let yearStr = date.getUTCFullYear().toString();
         let monthStr = Math.floor((date.getUTCMonth() + 1) / 10).toString() + ((date.getUTCMonth() + 1) % 10).toString();
         let dateStr = Math.floor(date.getUTCDate() / 10).toString() + (date.getUTCDate() % 10).toString();
 
         return monthStr + "/" + dateStr;
     }
+
+    // used to return upcoming weekend dates
     function getMatchDates() {
         let date = new Date();
         let day = date.getUTCDay();
@@ -331,17 +291,22 @@ function Home() {
 
         return [dateStr1, dateStr2];
     }
+
+    // used to get current UTC day
     function getDay() {
         let date = new Date();
         return date.getUTCDay();
     }
 
+    // methods used to toggle between saturday and sunday game display
     function showSat(e) {
         changeDis(['', 'none']);
     }
     function showSun(e) {
         changeDis(['none', '']);
     }
+
+    // used to make team jersey component
     function jersey(teamName) {
         let link = "https://pbteams.nbc-sports-boom-fantasy.com/cdn-cgi/image/f=auto,fit=contain,width=200/https://pbteams.s3.amazonaws.com/" + jObj[teamName] + "2021.png";
 
@@ -354,6 +319,7 @@ function Home() {
             } />
         );
     }
+
 
     function matchDiv(day) {
         let dayArr = ["Saturday", "Sunday"];
